@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let cpuScore = 0;
+        let playerScore = 0;
+
+        let computerPlay = () => {
+            let turn = Math.floor(Math.random() * (3));
+            console.log(turn)
+            if (turn == 0) {
+                return "rock";
+            } else if (turn == 1) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+
+        let playRound = (player, cpu) => {
+            player = player.toLowerCase();
+            cpu = cpu.toLowerCase();
+            if (player == cpu) {
+                return `It's a draw! The Computer also chose ${cpu}`
+            } else if (player == "rock" && cpu == "scissors" || 
+                       player == "paper" && cpu == "rock" || 
+                       player == "scissors" && cpu == "paper") {
+                playerScore++;
+                return `You win! ${player} beats ${cpu}`
+            } else {
+                cpuScore++;
+                return `You lose! ${player} loses to ${cpu}`
+            }
+        }
+
+        
+
+        let game = () => {
+            for (let i = 0; i < 5; i++) {
+                let cpu = computerPlay();
+                let player = prompt("What's your move?");
+                player = player.toLowerCase();
+                while (player != "rock" && player != "paper" && player != "scissors") {
+                        alert("Invalid move! Try again...");
+                        player = prompt("What's your move?");
+                    }
+
+                playRound(player, cpu);
+                console.log(`Score: ${playerScore} - ${cpuScore}`);
+            }
+
+            if (playerScore > cpuScore) {
+                console.log(`You Win! Final Score: ${playerScore} - ${cpuScore}`);
+            } else {
+                console.log(`You Lose! Final Score: ${playerScore} - ${cpuScore}`);
+            }
+
+            playerScore = 0;
+            cpuScore = 0;
+        }
+
+        console.log(game())
+    </script>
+
+</body>
+</html>
